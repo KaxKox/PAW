@@ -34,7 +34,7 @@ func colorHandler(w http.ResponseWriter, r *http.Request) {
 
 	if !langs[lng] {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]string{"error": "brak jezyka: " + lng})
+		json.NewEncoder(w).Encode(map[string]string{"error": "brak języka: " + lng})
 		return
 	}
 
