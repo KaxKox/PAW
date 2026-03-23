@@ -11,7 +11,7 @@ type Response struct {
 		Temp float64 `json:"temperature_2m"`
 	} `json:"current"`
 	Hourly struct {
-		Time []string `json:"time"`
+		Time []string  `json:"time"`
 		Temp []float64 `json:"temperature_2m"`
 	} `json:"hourly"`
 }

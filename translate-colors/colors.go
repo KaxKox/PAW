@@ -7,7 +7,7 @@ import (
 
 type Color struct {
 	Names map[string]string
-	Hex string
+	Hex   string
 }
 
 var colors = []Color{
@@ -19,25 +19,25 @@ var colors = []Color{
 }
 
 var langs = map[string]bool{"pl": true, "en": true, "de": true}
- 
+
 func colorHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
- 
+
 	name := r.URL.Query().Get("name")
 	lng := r.URL.Query().Get("lng")
- 
+
 	if name == "" || lng == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]string{"error": "missing 'name' or 'lng' parameter"})
+		json.NewEncoder(w).Encode(map[string]string{"error": "brak parametru 'name' lub 'lng'"})
 		return
 	}
- 
+
 	if !langs[lng] {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]string{"error": "unsupported language: " + lng})
+		json.NewEncoder(w).Encode(map[string]string{"error": "brak jezyka: " + lng})
 		return
 	}
- 
+
 	for _, c := range colors {
 		for _, n := range c.Names {
 			if n == name {
@@ -51,11 +51,11 @@ func colorHandler(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
- 
+
 	w.WriteHeader(http.StatusNotFound)
-	json.NewEncoder(w).Encode(map[string]string{"error": "color not found: " + name})
+	json.NewEncoder(w).Encode(map[string]string{"error": "nie znaleziono koloru: " + name})
 }
- 
+
 func main() {
 	http.HandleFunc("/color", colorHandler)
 	http.ListenAndServe(":8080", nil)
