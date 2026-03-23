@@ -31,7 +31,7 @@ func main() {
 	}
 
 	fmt.Printf("Aktualna temperatura: %.1f°C\n", data.Current.Temp)
-	fmt.Println("\nPrognoza godzinowa:")
+	fmt.Println("\nPrognoza godzinowa: ")
 
 	for i := 0; i < 24; i++ {
 		fmt.Printf("%s: %.1f°C\n", data.Hourly.Time[i][11:], data.Hourly.Temp[i])
